@@ -3,6 +3,7 @@ package meli.dh.com.finalmeliproject.service.product;
 import com.sun.istack.Nullable;
 import meli.dh.com.finalmeliproject.dto.BatchDTO;
 import meli.dh.com.finalmeliproject.dto.ProductBatchDTO;
+import meli.dh.com.finalmeliproject.dto.ResponseProductBatchStockDTO;
 import meli.dh.com.finalmeliproject.exception.BadRequestExceptionImp;
 import meli.dh.com.finalmeliproject.exception.NotFoundExceptionImp;
 import meli.dh.com.finalmeliproject.model.Batch;
@@ -88,25 +89,25 @@ public class ProductService implements IProductService {
         return response;
     }
 
-    public List<Product> filterProductsByBatch (String productId, String order){
-        repo.findById(productId);
+    public List<ResponseProductBatchStockDTO> filterProductsByBatch (String productId, String order){
+//        repo.findById(productId);
 
         switch (order) {
             case "B":
-                return repo.findAll()
+                return repo.findByBatch()
                         .stream()
                         .sorted((b1, b2) -> b1.compareToBatch(b2))
                         .collect(Collectors.toList());
-            case "Q":
-                return repo.findAll()
-                        .stream()
-                        .sorted()
-                        .collect(Collectors.toList());
-                // TODO: fazer query para pegar a quantidade
+//            case "Q":
+//                return repo.findByQuantity(productId, order)
+//                        .stream()
+//                        .sorted()
+//                        .collect(Collectors.toList());
+//                // TODO: fazer query para pegar a quantidade
             case "D":
                 return repo.findAll()
                         .stream()
-                        .sorted((d1, d2) -> d1.getDueDate().compareTo(d2.getDueDate()))
+                        .sorted((d1,d2) -> d1.compareToBatch(d2))
                         .collect(Collectors.toList());
             default:
                 throw new BadRequestExceptionImp("Order not found");

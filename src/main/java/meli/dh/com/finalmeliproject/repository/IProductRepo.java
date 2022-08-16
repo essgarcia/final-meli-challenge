@@ -16,6 +16,20 @@ import java.util.List;
 public interface IProductRepo extends JpaRepository<Product, Long> {
     public Product findById(String id);
 
+//    @Query(value= "SELECT DISTINCT p.id, wp.quantity AS 'totalQuantity' " +
+//            "FROM ware_house_product wp " +
+//            "INNER JOIN product p on wp.id_product = p.id " +
+//            "WHERE p.id LIKE :productId " +
+//            "ORDER BY wp.quantity", nativeQuery = true)
+//    List<Product> findByQuantity(@Param("productId") String product, @Param("order") String order);
+
+//    @Query(value= "SELECT DISTINCT p.name AS 'productId', wp.quantity AS 'totalQuantity', p.due_date AS 'dueDate' " +
+//            "FROM ware_house_product wp " +
+//            "INNER JOIN product p on wp.id_product = p.id " +
+//            "WHERE p.name LIKE :productId AND p.due_date > CURRENT_DATE + 21" +
+//            "ORDER BY p.due_date ASC", nativeQuery = true)
+//    List<Product> findByDate(@Param("productId") String product, @Param("order") String order);
+
     @Query(value= "SELECT DISTINCT p.name AS 'productId', wp.quantity AS 'currentQuantity', p.due_date AS 'dueDate', id_warehouse " +
             "AS 'warehouseCode', id_batch as 'batchNumber', category_name AS 'sectionCode'" +
             "FROM ware_house_product wp " +

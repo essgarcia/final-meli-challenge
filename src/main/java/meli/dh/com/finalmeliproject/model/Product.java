@@ -4,13 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.Valid;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Positive;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Random;
 import java.util.UUID;
 
 @Entity
