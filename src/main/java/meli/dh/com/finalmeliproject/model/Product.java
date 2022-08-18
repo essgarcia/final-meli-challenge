@@ -1,11 +1,17 @@
 package meli.dh.com.finalmeliproject.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
@@ -22,7 +28,8 @@ public class Product {
     private String id;
 
     private String name;
-    private int quantity;
+
+    private double price;
 
     @ManyToOne
     @JoinColumn(name = "id_category")
@@ -37,13 +44,21 @@ public class Product {
 
     private LocalDateTime manufacturingDate;
 
-    public Product(String name, int quantity, Category category, Batch batch, LocalDate dueDate, LocalDateTime manufacturingDate) {
+    @OneToMany(mappedBy = "product")
+    @JsonIgnore
+    private List<Feedback> feedbacks;
+
+    public Product(String name, double price, Category category, Batch batch, LocalDate dueDate, LocalDateTime manufacturingDate) {
         this.setId("CF-" + UUID.randomUUID());
         this.setName(name);
-        this.setQuantity(quantity);
+        this.setPrice(price);
         this.setCategory(category);
         this.setBatch(batch);
         this.setDueDate(dueDate);
         this.setManufacturingDate(manufacturingDate);
+    }
+
+    public int compareToBatch(Product p) {
+        return (int) (this.getBatch().getId() - p.getBatch().getId());
     }
 }
