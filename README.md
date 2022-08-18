@@ -48,9 +48,3 @@ how the transportation works.
 
 [Link to Postman](https://go.postman.co/workspace/CodeFellas555~18835d57-821b-4b17-8915-d6cb97024355/collection/22620877-eb32a886-9c59-4cc3-9caa-c7ca3290c128?action=share&creator=21803236s)
 
-# Final-Meli-Challenge
-Final Meli challenge of the integrator project by Digital House
-
-# Objective
-The final project objective is to implement a REST API applying the knowledge acquired during Meli Bootcamp (Git, Java, Spring, Banco de Dados,
-Qualidade e Segurança).
